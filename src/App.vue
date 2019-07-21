@@ -49,17 +49,33 @@
 import VueHero from './components/VueHero';
 import gql from 'graphql-tag';
 
+const heroFragment = gql`
+  fragment HeroFragment on Hero {
+    id
+    name
+    twitter
+    github
+    image
+  }
+`;
+
 const allHeroesQuery = gql`
-  query AllHeroes {   
+  query AllHeroes {
     allHeroes {
-      id
-      name
-      twitter
-      github
-      image
+      ...HeroFragment
     }
   }
-`
+  ${heroFragment}
+`;
+
+const addHeroMutation = gql`
+  mutation AddHero($hero: HeroInput!) {
+    addHero(hero: $hero) {
+      ...HeroFragment
+    }
+  }
+  ${heroFragment}
+`;
 
 export default {
   name: 'app',
@@ -80,8 +96,8 @@ export default {
   },
   apollo: {
     allHeroes: {
-      query: allHeroesQuery
-    }
+      query: allHeroesQuery,
+    },
   },
   methods: {
     addHero() {
@@ -96,6 +112,18 @@ export default {
       this.image = '';
       this.github = '';
       this.twitter = '';
+
+      this.$apollo.mutate({
+        mutation: addHeroMutation,
+        variables: {
+          hero,
+        },
+        update: (store, { data: { addHero } }) => {
+          const data = store.readQuery({ query: allHeroesQuery });
+          data.allHeroes.push(addHero);
+          store.writeQuery({ query: allHeroesQuery, data });
+        },
+      });
     },
     deleteHero(name) {},
   },
