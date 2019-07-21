@@ -77,6 +77,12 @@ const addHeroMutation = gql`
   ${heroFragment}
 `;
 
+const deleteHeroMutation = gql`
+  mutation DeleteHero($name: String!) {
+    deleteHero(name: $name)
+  }
+`;
+
 export default {
   name: 'app',
   data() {
@@ -125,7 +131,20 @@ export default {
         },
       });
     },
-    deleteHero(name) {},
+    deleteHero(name) {
+      this.$apollo.mutate({
+        mutation: deleteHeroMutation,
+        variables: {
+          name,
+        },
+        update: store => {
+          const data = store.readQuery({ query: allHeroesQuery });
+          const heroToDelete = data.allHeroes.find(hero => hero.name === name);
+          data.allHeroes.splice(data.allHeroes.indexOf(heroToDelete), 1);
+          store.writeQuery({ query: allHeroesQuery, data });
+        },
+      });
+    },
   },
 };
 </script>
