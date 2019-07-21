@@ -49,6 +49,18 @@
 import VueHero from './components/VueHero';
 import gql from 'graphql-tag';
 
+const allHeroesQuery = gql`
+  query AllHeroes {   
+    allHeroes {
+      id
+      name
+      twitter
+      github
+      image
+    }
+  }
+`
+
 export default {
   name: 'app',
   data() {
@@ -65,6 +77,11 @@ export default {
   },
   components: {
     VueHero,
+  },
+  apollo: {
+    allHeroes: {
+      query: allHeroesQuery
+    }
   },
   methods: {
     addHero() {
