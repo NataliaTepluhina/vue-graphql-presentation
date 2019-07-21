@@ -1,0 +1,29 @@
+## Hero member
+type Hero {
+  id: ID!
+  name: String!
+  image: String
+  github: String
+  twitter: String
+}
+
+input HeroInput {
+  name: String!
+  image: String
+  github: String
+  twitter: String
+}
+
+type Query {
+  allHeroes: [Hero]
+  getHero(name: String!): Hero!
+}
+
+type Mutation {
+  addHero(hero: HeroInput!): Hero!
+  deleteHero(name: String!): Boolean
+}
+
+type Subscription {
+  heroSub: Hero!
+}

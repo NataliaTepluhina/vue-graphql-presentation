@@ -1,0 +1,31 @@
+{
+  "name": "vue-graphql-example",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "apollo": "vue-cli-service apollo:dev --generate-schema",
+    "apollo:schema:generate": "vue-cli-service apollo:schema:generate",
+    "apollo:schema:publish": "vue-cli-service apollo:schema:publish",
+    "apollo:start": "vue-cli-service apollo:start"
+  },
+  "dependencies": {
+    "core-js": "^2.6.5",
+    "graphql-type-json": "^0.2.1",
+    "lowdb": "^1.0.0",
+    "shortid": "^2.2.14",
+    "vue": "^2.6.10",
+    "vue-apollo": "^3.0.0-beta.11",
+    "vuetify": "^1.5.16"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.9.0",
+    "@vue/cli-service": "^3.9.0",
+    "graphql-tag": "^2.9.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.1.0",
+    "vue-cli-plugin-apollo": "^0.21.0",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
