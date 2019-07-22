@@ -1,29 +1,21 @@
-# vue-graphql-example
+# Vue + GraphQL + Apollo fullstack example
 
-## Project setup
-```
-yarn install
-```
+This is a demo application combining Apollo Server as a GraphQL API and a Vue application with Apollo Client on a frontend side. To start a GraphQL server, please run:
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
+```bash
+npm run apollo
+# OR
+yarn apollo
 ```
 
-### Compiles and minifies for production
-```
-yarn run build
+The server will be running on `localhost:4000/graphql` and you can find a Prisma playground on this URL as well to check the schema & test queries.
+
+To start the frontend app you should run
+
+```bash
+npm run serve
+# OR
+yarn serve
 ```
 
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+The application will be running on `localhost:8080`.
