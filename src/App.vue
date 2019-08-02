@@ -10,11 +10,11 @@
       <v-container fluid class="app-container white" fill-height grid-list-md>
         <v-layout class="hero-cards-layout" wrap v-if="allHeroes.length">
           <template v-for="hero in allHeroes">
-            <vue-hero
+            <hero
               :hero="hero"
               @deleteHero="deleteHero($event)"
               :key="hero.name"
-            ></vue-hero>
+            ></hero>
           </template>
         </v-layout>
         <v-dialog v-model="dialog" width="800" v-if="allHeroes.length">
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import VueHero from './components/VueHero';
+import Hero from './components/Hero';
 import gql from 'graphql-tag';
 
 export default {
@@ -64,7 +64,7 @@ export default {
     };
   },
   components: {
-    VueHero,
+    Hero,
   },
   methods: {
     addHero() {
