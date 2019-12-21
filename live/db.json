@@ -2,75 +2,45 @@
   "heroes": [
     {
       "id": "5ahW7OxdZ",
-      "name": "Gabriel Micko",
-      "image": "http://vinnytsiajs.org/storage/2019/04/Gabriel_Micko.jpg",
-      "twitter": "gabriel_micko",
-      "github": "gabrielmicko"
+      "name": "Evan You",
+      "image": "https://pbs.twimg.com/profile_images/1206997998900850688/cTXTQiHm_400x400.jpg",
+      "twitter": "youyuxi",
+      "github": "yyx990803"
     },
     {
       "id": "b0PCURlkf",
-      "name": "Milica Mihajlija",
-      "image": "http://vinnytsiajs.org/storage/2019/04/Milica_Mihajlija.jpg",
-      "twitter": "bibydigital",
-      "github": "mihajlija"
+      "name": "Guillaume Chau",
+      "image": "https://pbs.twimg.com/profile_images/968837920688869376/KKtiQ1hY_400x400.jpg",
+      "twitter": "Akryum",
+      "github": "Akryum"
     },
     {
       "id": "bneqe0dcq",
-      "name": "Paul Yuhnovich",
-      "image": "http://vinnytsiajs.org/storage/2018/06/Pavel_Yukhnovich-2-400x400.jpg",
-      "twitter": "Paul_Yuhnovich",
-      "github": "pachareal"
+      "name": "Eduardo San Martin Morote",
+      "image": "https://pbs.twimg.com/profile_images/1207800596058628101/BRm6o3my_400x400.jpg",
+      "twitter": "posva",
+      "github": "posva"
     },
     {
       "id": "Jq2uzIh4u",
-      "name": "Khrystyna Landvytovych",
-      "image": "http://vinnytsiajs.org/storage/2019/05/Khrystyna-Landvytovych-420x456-400x400.jpeg",
-      "twitter": "croftyland",
-      "github": "Croftyland"
+      "name": "Sarah Drasner",
+      "image": "https://pbs.twimg.com/profile_images/1160342217837436928/VR_zqvk1_400x400.jpg",
+      "twitter": "sarah_edo",
+      "github": "sdras"
     },
     {
       "id": "KWAXP1uT5",
-      "name": "Prashant Palikhe",
-      "image": "http://vinnytsiajs.org/storage/2019/06/Prashant_Palikhe-456x456-400x400.jpg",
-      "twitter": "PrashantPalikhe",
-      "github": "prashantpalikhe"
+      "name": "Thorsten Lünborg",
+      "image": "https://pbs.twimg.com/profile_images/1139622278092722177/cNVjHMVb_400x400.jpg",
+      "twitter": "Linus_Borg",
+      "github": "LinusBorg"
     },
     {
       "id": "qeu7fPtVb",
-      "name": "Borys Mohyla",
-      "image": "http://vinnytsiajs.org/storage/2018/06/Borys_Mohyla-420x456-400x400.jpg",
-      "twitter": "BoryaMogila",
-      "github": "boryamogila"
-    },
-    {
-      "id": "qeufrveJb",
-      "name": "Yevhen Shemet",
-      "image": "http://vinnytsiajs.org/storage/2018/06/Yevhen-Shemet-420x456-400x400.jpg",
-      "github": "https://github.com/yevhene"
-    },
-    {
-      "id": "KWAdqd1uT5b",
-      "name": "Andrii Shtadler",
-      "image": "http://vinnytsiajs.org/storage/2018/03/Andrii_Shtadler-600-400x400.jpg"
-    },
-    {
-      "id": "bnLje0dcq",
-      "name": "Viktor Turskyi",
-      "image": "https://pbs.twimg.com/profile_images/1046845316404797440/RZhuDrjZ_400x400.jpg",
-      "twitter": "koorchik",
-      "github": "koorchik"
-    },
-    {
-      "id": "KnPKJh212",
-      "name": "Chris Trzesniewski",
-      "image": "https://pbs.twimg.com/profile_images/1092195200833859584/dqA0a3Jz_400x400.jpg",
-      "twitter": "ktrz__",
-      "github": "ktrz"
-    },
-    {
-      "id": "Lndm124114",
-      "name": "Oleksandr Kovtun",
-      "image": "http://vinnytsiajs.org/storage/2019/05/Oleksandr_Kovtun-400x400.jpg"
+      "name": "Chris Fritz",
+      "image": "https://pbs.twimg.com/profile_images/1030930265240162305/-b6cwxVU_400x400.jpg",
+      "twitter": "chrisvfritz",
+      "github": "chrisvfritz"
     }
   ]
 }
