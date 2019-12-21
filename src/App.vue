@@ -2,9 +2,7 @@
   <v-app>
     <v-toolbar color="teal darken-2" dark fixed app>
       <img class="logo" src="./assets/vue-graphql.png" alt="Logo" />
-      <v-toolbar-title class="hidden-xs-only"
-        >VinnitsyaJS Heroes</v-toolbar-title
-      >
+      <v-toolbar-title class="hidden-xs-only">Vue.js Heroes</v-toolbar-title>
     </v-toolbar>
     <v-content class="teal lighten-3">
       <v-container fluid class="app-container white" fill-height grid-list-md>
@@ -46,25 +44,25 @@
 </template>
 
 <script>
-import Hero from './components/Hero';
-import gql from 'graphql-tag';
+import Hero from "./components/Hero";
+import gql from "graphql-tag";
 
 export default {
-  name: 'app',
+  name: "app",
   data() {
     return {
       valid: false,
       dialog: false,
-      name: '',
-      nameRules: [v => !!v || 'Name is required'],
-      image: '',
-      github: '',
-      twitter: '',
-      allHeroes: [],
+      name: "",
+      nameRules: [v => !!v || "Name is required"],
+      image: "",
+      github: "",
+      twitter: "",
+      allHeroes: []
     };
   },
   components: {
-    Hero,
+    Hero
   },
   methods: {
     addHero() {
@@ -72,16 +70,16 @@ export default {
         name: this.name,
         image: this.image,
         twitter: this.twitter,
-        github: this.github,
+        github: this.github
       };
       this.dialog = false;
-      this.name = '';
-      this.image = '';
-      this.github = '';
-      this.twitter = '';
+      this.name = "";
+      this.image = "";
+      this.github = "";
+      this.twitter = "";
     },
-    deleteHero(name) {},
-  },
+    deleteHero(name) {}
+  }
 };
 </script>
 
