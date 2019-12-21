@@ -6,7 +6,8 @@
     </v-toolbar>
     <v-content class="teal lighten-3">
       <v-container fluid class="app-container white" fill-height grid-list-md>
-        <v-layout class="hero-cards-layout" wrap v-if="allHeroes.length">
+        <h2 v-if="loading">Loading...</h2>
+        <v-layout class="hero-cards-layout" wrap v-else>
           <template v-for="hero in allHeroes">
             <vue-hero
               :hero="hero"
@@ -15,7 +16,7 @@
             ></vue-hero>
           </template>
         </v-layout>
-        <v-dialog v-model="dialog" width="800" v-if="allHeroes.length">
+        <v-dialog v-model="dialog" width="800">
           <v-btn slot="activator" color="teal" dark>Add Hero</v-btn>
           <v-card class="dialog-form">
             <v-form v-model="valid">
@@ -34,7 +35,6 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-        <h3 class="headline" v-else>No heroes found 😭</h3>
       </v-container>
     </v-content>
     <v-footer color="teal darken-2" app>
@@ -45,10 +45,19 @@
 
 <script>
 import VueHero from "./components/VueHero";
-import gql from "graphql-tag";
+import allHeroesQuery from "./graphql/allHeroes.query.gql";
+import addHeroMutation from "./graphql/addHero.mutation.gql";
+import { useQuery, useResult, useMutation } from "@vue/apollo-composable";
 
 export default {
   name: "app",
+  setup() {
+    const { result, loading } = useQuery(allHeroesQuery);
+    const allHeroes = useResult(result, null, data => data.allHeroes);
+    const { mutate: addNewHero } = useMutation(addHeroMutation);
+
+    return { allHeroes, loading, addNewHero };
+  },
   data() {
     return {
       valid: false,
@@ -77,6 +86,7 @@ export default {
       this.image = "";
       this.github = "";
       this.twitter = "";
+      this.addNewHero({ hero });
     },
     deleteHero(name) {}
   }

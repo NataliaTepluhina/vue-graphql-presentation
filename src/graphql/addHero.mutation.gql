@@ -1,0 +1,9 @@
+mutation AddHero($hero: HeroInput!) {
+  addHero(hero: $hero) {
+    id
+    twitter
+    name
+    github
+    image
+  }
+}

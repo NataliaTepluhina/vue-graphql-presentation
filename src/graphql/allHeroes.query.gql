@@ -1,0 +1,9 @@
+query AllHeroes {
+  allHeroes {
+    id
+    name
+    twitter
+    github
+    image
+  }
+}
