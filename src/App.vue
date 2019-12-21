@@ -11,7 +11,7 @@
           <template v-for="hero in allHeroes">
             <vue-hero
               :hero="hero"
-              @deleteHero="deleteHero($event)"
+              @deleteHero="deleteHero({ name: $event })"
               :key="hero.name"
             ></vue-hero>
           </template>
@@ -47,6 +47,7 @@
 import VueHero from "./components/VueHero";
 import allHeroesQuery from "./graphql/allHeroes.query.gql";
 import addHeroMutation from "./graphql/addHero.mutation.gql";
+import deleteHeroMutation from "./graphql/deleteHero.mutation.gql";
 import { useQuery, useResult, useMutation } from "@vue/apollo-composable";
 
 export default {
@@ -55,8 +56,9 @@ export default {
     const { result, loading } = useQuery(allHeroesQuery);
     const allHeroes = useResult(result, null, data => data.allHeroes);
     const { mutate: addNewHero } = useMutation(addHeroMutation);
+    const { mutate: deleteHero } = useMutation(deleteHeroMutation);
 
-    return { allHeroes, loading, addNewHero };
+    return { allHeroes, loading, addNewHero, deleteHero };
   },
   data() {
     return {
@@ -87,8 +89,7 @@ export default {
       this.github = "";
       this.twitter = "";
       this.addNewHero({ hero });
-    },
-    deleteHero(name) {}
+    }
   }
 };
 </script>

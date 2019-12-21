@@ -1,0 +1,3 @@
+mutation DeleteHero($name: String!) {
+  deleteHero(name: $name)
+}
