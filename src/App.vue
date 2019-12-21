@@ -55,7 +55,14 @@ export default {
   setup() {
     const { result, loading } = useQuery(allHeroesQuery);
     const allHeroes = useResult(result, null, data => data.allHeroes);
-    const { mutate: addNewHero } = useMutation(addHeroMutation);
+    const { mutate: addNewHero } = useMutation(addHeroMutation, {
+      update: (cache, { data: { addHero } }) => {
+        const data = cache.readQuery({ query: allHeroesQuery });
+        data.allHeroes = [...data.allHeroes, addHero];
+        cache.writeQuery({ query: allHeroesQuery, data });
+      }
+    });
+
     const { mutate: deleteHero } = useMutation(deleteHeroMutation);
 
     return { allHeroes, loading, addNewHero, deleteHero };
