@@ -11,12 +11,13 @@
     "apollo:start": "vue-cli-service apollo:start"
   },
   "dependencies": {
+    "@vue/apollo-composable": "^4.0.0-alpha.4",
+    "@vue/composition-api": "^0.3.4",
     "core-js": "^2.6.5",
     "graphql-type-json": "^0.2.1",
     "lowdb": "^1.0.0",
     "shortid": "^2.2.14",
     "vue": "^2.6.10",
-    "vue-apollo": "^3.0.0-beta.11",
     "vuetify": "^1.5.16"
   },
   "devDependencies": {
