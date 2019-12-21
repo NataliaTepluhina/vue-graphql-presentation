@@ -2,9 +2,7 @@
   <v-app>
     <v-toolbar color="teal darken-2" dark fixed app>
       <img class="logo" src="./assets/vue-graphql.png" alt="Logo" />
-      <v-toolbar-title class="hidden-xs-only"
-        >VinnitsyaJS Heroes</v-toolbar-title
-      >
+      <v-toolbar-title class="hidden-xs-only">VueJS Heroes</v-toolbar-title>
     </v-toolbar>
     <v-content class="teal lighten-3">
       <v-container fluid class="app-container white" fill-height grid-list-md>
@@ -46,64 +44,25 @@
 </template>
 
 <script>
-import VueHero from './components/VueHero';
-import gql from 'graphql-tag';
-
-const heroFragment = gql`
-  fragment HeroFragment on Hero {
-    id
-    name
-    twitter
-    github
-    image
-  }
-`;
-
-const allHeroesQuery = gql`
-  query AllHeroes {
-    allHeroes {
-      ...HeroFragment
-    }
-  }
-  ${heroFragment}
-`;
-
-const addHeroMutation = gql`
-  mutation AddHero($hero: HeroInput!) {
-    addHero(hero: $hero) {
-      ...HeroFragment
-    }
-  }
-  ${heroFragment}
-`;
-
-const deleteHeroMutation = gql`
-  mutation DeleteHero($name: String!) {
-    deleteHero(name: $name)
-  }
-`;
+import VueHero from "./components/VueHero";
+import gql from "graphql-tag";
 
 export default {
-  name: 'app',
+  name: "app",
   data() {
     return {
       valid: false,
       dialog: false,
-      name: '',
-      nameRules: [v => !!v || 'Name is required'],
-      image: '',
-      github: '',
-      twitter: '',
-      allHeroes: [],
+      name: "",
+      nameRules: [v => !!v || "Name is required"],
+      image: "",
+      github: "",
+      twitter: "",
+      allHeroes: []
     };
   },
   components: {
-    VueHero,
-  },
-  apollo: {
-    allHeroes: {
-      query: allHeroesQuery,
-    },
+    VueHero
   },
   methods: {
     addHero() {
@@ -111,41 +70,16 @@ export default {
         name: this.name,
         image: this.image,
         twitter: this.twitter,
-        github: this.github,
+        github: this.github
       };
       this.dialog = false;
-      this.name = '';
-      this.image = '';
-      this.github = '';
-      this.twitter = '';
-
-      this.$apollo.mutate({
-        mutation: addHeroMutation,
-        variables: {
-          hero,
-        },
-        update: (store, { data: { addHero } }) => {
-          const data = store.readQuery({ query: allHeroesQuery });
-          data.allHeroes.push(addHero);
-          store.writeQuery({ query: allHeroesQuery, data });
-        },
-      });
+      this.name = "";
+      this.image = "";
+      this.github = "";
+      this.twitter = "";
     },
-    deleteHero(name) {
-      this.$apollo.mutate({
-        mutation: deleteHeroMutation,
-        variables: {
-          name,
-        },
-        update: store => {
-          const data = store.readQuery({ query: allHeroesQuery });
-          const heroToDelete = data.allHeroes.find(hero => hero.name === name);
-          data.allHeroes.splice(data.allHeroes.indexOf(heroToDelete), 1);
-          store.writeQuery({ query: allHeroesQuery, data });
-        },
-      });
-    },
-  },
+    deleteHero(name) {}
+  }
 };
 </script>
 
