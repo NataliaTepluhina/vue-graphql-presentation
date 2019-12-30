@@ -60,7 +60,6 @@ import { useQuery, useResult, useMutation } from "@vue/apollo-composable";
 export default {
   name: "app",
   setup() {
-    let deletingHeroName;
     const { result, loading } = useQuery(allHeroesQuery);
     const allHeroes = useResult(result, null, data => data.allHeroes);
     const { mutate: addNewHero } = useMutation(addHeroMutation, {
