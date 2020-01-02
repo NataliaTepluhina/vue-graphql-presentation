@@ -2,20 +2,20 @@
   <v-app>
     <v-toolbar color="teal darken-2" dark fixed app>
       <img class="logo" src="./assets/vue-graphql.png" alt="Logo" />
-      <v-toolbar-title class="hidden-xs-only"
-        >VinnitsyaJS Heroes</v-toolbar-title
-      >
+      <v-toolbar-title class="hidden-xs-only">Vue Heroes</v-toolbar-title>
     </v-toolbar>
     <v-content class="teal lighten-3">
       <v-container fluid class="app-container white" fill-height grid-list-md>
-        <v-layout class="hero-cards-layout" wrap v-if="allHeroes.length">
-          <template v-for="hero in allHeroes">
-            <vue-hero
-              :hero="hero"
-              @deleteHero="deleteHero($event)"
-              :key="hero.name"
-            ></vue-hero>
-          </template>
+        <div v-if="$apollo.queries.allHeroes.loading">
+          Loading...
+        </div>
+        <v-layout v-else class="hero-cards-layout" wrap>
+          <vue-hero
+            v-for="hero in allHeroes"
+            :hero="hero"
+            @deleteHero="deleteHero($event)"
+            :key="hero.name"
+          ></vue-hero>
         </v-layout>
         <v-dialog v-model="dialog" width="800" v-if="allHeroes.length">
           <v-btn slot="activator" color="teal" dark>Add Hero</v-btn>
@@ -32,7 +32,9 @@
               <v-text-field v-model="github" label="Github"></v-text-field>
             </v-form>
             <v-card-actions>
-              <v-btn :disabled="!valid" @click="addHero">submit</v-btn>
+              <v-btn :disabled="!valid" :loading="isSaving" @click="addHero"
+                >submit</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -46,8 +48,8 @@
 </template>
 
 <script>
-import VueHero from './components/VueHero';
-import gql from 'graphql-tag';
+import VueHero from "./components/VueHero";
+import gql from "graphql-tag";
 
 const heroFragment = gql`
   fragment HeroFragment on Hero {
@@ -84,26 +86,27 @@ const deleteHeroMutation = gql`
 `;
 
 export default {
-  name: 'app',
+  name: "app",
   data() {
     return {
       valid: false,
       dialog: false,
-      name: '',
-      nameRules: [v => !!v || 'Name is required'],
-      image: '',
-      github: '',
-      twitter: '',
+      name: "",
+      nameRules: [v => !!v || "Name is required"],
+      image: "",
+      github: "",
+      twitter: "",
       allHeroes: [],
+      isSaving: false
     };
   },
   components: {
-    VueHero,
+    VueHero
   },
   apollo: {
     allHeroes: {
-      query: allHeroesQuery,
-    },
+      query: allHeroesQuery
+    }
   },
   methods: {
     addHero() {
@@ -111,41 +114,45 @@ export default {
         name: this.name,
         image: this.image,
         twitter: this.twitter,
-        github: this.github,
+        github: this.github
       };
-      this.dialog = false;
-      this.name = '';
-      this.image = '';
-      this.github = '';
-      this.twitter = '';
-
-      this.$apollo.mutate({
-        mutation: addHeroMutation,
-        variables: {
-          hero,
-        },
-        update: (store, { data: { addHero } }) => {
-          const data = store.readQuery({ query: allHeroesQuery });
-          data.allHeroes.push(addHero);
-          store.writeQuery({ query: allHeroesQuery, data });
-        },
-      });
+      this.isSaving = true;
+      this.$apollo
+        .mutate({
+          mutation: addHeroMutation,
+          variables: {
+            hero
+          },
+          update: (store, { data: { addHero } }) => {
+            const data = store.readQuery({ query: allHeroesQuery });
+            data.allHeroes.push(addHero);
+            store.writeQuery({ query: allHeroesQuery, data });
+          }
+        })
+        .finally(() => {
+          this.dialog = false;
+          this.isSaving = false;
+          this.name = "";
+          this.image = "";
+          this.github = "";
+          this.twitter = "";
+        });
     },
     deleteHero(name) {
       this.$apollo.mutate({
         mutation: deleteHeroMutation,
         variables: {
-          name,
+          name
         },
         update: store => {
           const data = store.readQuery({ query: allHeroesQuery });
           const heroToDelete = data.allHeroes.find(hero => hero.name === name);
           data.allHeroes.splice(data.allHeroes.indexOf(heroToDelete), 1);
           store.writeQuery({ query: allHeroesQuery, data });
-        },
+        }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
