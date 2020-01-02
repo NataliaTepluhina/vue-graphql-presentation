@@ -7,21 +7,25 @@
     <v-content class="teal lighten-3">
       <v-container fluid class="app-container white" fill-height grid-list-md>
         <h2 v-if="loading">Loading...</h2>
-        <v-layout class="hero-cards-layout" wrap v-else>
-          <template v-for="hero in allHeroes">
-            <vue-hero
-              :hero="hero"
-              @deleteHero="
-                deleteHero(
-                  { name: $event },
-                  {
-                    update: cache => updateHeroAfterDelete(cache, $event)
-                  }
-                )
-              "
-              :key="hero.name"
-            ></vue-hero>
-          </template>
+        <v-layout v-else class="hero-cards-layout" wrap>
+          <vue-hero
+            v-for="hero in allHeroes"
+            :hero="hero"
+            @deleteHero="
+              deleteHero(
+                { name: $event },
+                {
+                  update: cache => updateHeroAfterDelete(cache, $event)
+                }
+              )
+            "
+            :key="hero.name"
+          ></vue-hero>
+          <v-flex md3 xs12 v-if="isSaving">
+            <v-card height="100%" class="centered">
+              <v-progress-circular indeterminate></v-progress-circular>
+            </v-card>
+          </v-flex>
         </v-layout>
         <v-dialog v-model="dialog" width="800">
           <v-btn slot="activator" color="teal" dark>Add Hero</v-btn>
@@ -62,13 +66,16 @@ export default {
   setup() {
     const { result, loading } = useQuery(allHeroesQuery);
     const allHeroes = useResult(result, null, data => data.allHeroes);
-    const { mutate: addNewHero } = useMutation(addHeroMutation, {
-      update: (cache, { data: { addHero } }) => {
-        const data = cache.readQuery({ query: allHeroesQuery });
-        data.allHeroes = [...data.allHeroes, addHero];
-        cache.writeQuery({ query: allHeroesQuery, data });
+    const { mutate: addNewHero, loading: isSaving } = useMutation(
+      addHeroMutation,
+      {
+        update: (cache, { data: { addHero } }) => {
+          const data = cache.readQuery({ query: allHeroesQuery });
+          data.allHeroes = [...data.allHeroes, addHero];
+          cache.writeQuery({ query: allHeroesQuery, data });
+        }
       }
-    });
+    );
 
     const { mutate: deleteHero } = useMutation(deleteHeroMutation);
 
@@ -83,7 +90,8 @@ export default {
       loading,
       addNewHero,
       deleteHero,
-      updateHeroAfterDelete
+      updateHeroAfterDelete,
+      isSaving
     };
   },
   data() {
@@ -165,6 +173,12 @@ export default {
       }
     }
   }
+}
+
+.centered {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 480px) {
