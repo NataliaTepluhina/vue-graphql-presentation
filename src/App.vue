@@ -16,6 +16,11 @@
             @deleteHero="deleteHero($event)"
             :key="hero.name"
           ></vue-hero>
+          <v-flex md3 xs12 v-if="isSaving">
+            <v-card height="100%" class="centered">
+              <v-progress-circular indeterminate></v-progress-circular>
+            </v-card>
+          </v-flex>
         </v-layout>
         <v-dialog v-model="dialog" width="800" v-if="allHeroes.length">
           <v-btn slot="activator" color="teal" dark>Add Hero</v-btn>
@@ -32,9 +37,7 @@
               <v-text-field v-model="github" label="Github"></v-text-field>
             </v-form>
             <v-card-actions>
-              <v-btn :disabled="!valid" :loading="isSaving" @click="addHero"
-                >submit</v-btn
-              >
+              <v-btn :disabled="!valid" @click="addHero">submit</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -116,6 +119,11 @@ export default {
         twitter: this.twitter,
         github: this.github
       };
+      this.dialog = false;
+      this.name = "";
+      this.image = "";
+      this.github = "";
+      this.twitter = "";
       this.isSaving = true;
       this.$apollo
         .mutate({
@@ -130,12 +138,7 @@ export default {
           }
         })
         .finally(() => {
-          this.dialog = false;
           this.isSaving = false;
-          this.name = "";
-          this.image = "";
-          this.github = "";
-          this.twitter = "";
         });
     },
     deleteHero(name) {
@@ -201,6 +204,12 @@ export default {
       }
     }
   }
+}
+
+.centered {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 480px) {
