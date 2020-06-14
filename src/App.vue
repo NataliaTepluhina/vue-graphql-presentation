@@ -52,41 +52,9 @@
 
 <script>
 import VueHero from './components/VueHero'
-import gql from 'graphql-tag'
-
-const heroFragment = gql`
-  fragment HeroFragment on Hero {
-    id
-    name
-    twitter
-    github
-    image
-  }
-`
-
-const allHeroesQuery = gql`
-  query AllHeroes {
-    allHeroes {
-      ...HeroFragment
-    }
-  }
-  ${heroFragment}
-`
-
-const addHeroMutation = gql`
-  mutation AddHero($hero: HeroInput!) {
-    addHero(hero: $hero) {
-      ...HeroFragment
-    }
-  }
-  ${heroFragment}
-`
-
-const deleteHeroMutation = gql`
-  mutation DeleteHero($name: String!) {
-    deleteHero(name: $name)
-  }
-`
+import allHeroesQuery from './graphql/allHeroes.query.gql'
+import addHeroMutation from './graphql/addHero.mutation.gql'
+import deleteHeroMutation from './graphql/deleteHero.mutation.gql'
 
 export default {
   name: 'app',

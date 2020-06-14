@@ -1,0 +1,7 @@
+fragment HeroFragment on Hero {
+  id
+  name
+  twitter
+  github
+  image
+}

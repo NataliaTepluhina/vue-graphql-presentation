@@ -1,0 +1,7 @@
+#import "./hero.fragment.gql"
+
+query AllHeroes {
+  allHeroes {
+    ...HeroFragment
+  }
+}
