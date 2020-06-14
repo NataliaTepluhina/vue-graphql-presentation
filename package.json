@@ -16,7 +16,7 @@
     "lowdb": "^1.0.0",
     "shortid": "^2.2.14",
     "vue": "^2.6.10",
-    "vue-apollo": "^3.0.0-beta.11",
+    "vue-apollo": "^3.0.3",
     "vuetify": "^1.5.16"
   },
   "devDependencies": {

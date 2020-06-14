@@ -1,6 +1,6 @@
 <template>
   <v-flex md3 xs12>
-    <v-card>
+    <v-card height="100%">
       <v-img height="250px" :src="hero.image"></v-img>
       <v-card-title primary-title class="hero-title">
         <div>

@@ -10,21 +10,21 @@
     {
       "id": "b0PCURlkf",
       "name": "Guillaume Chau",
-      "image": "https://pbs.twimg.com/profile_images/968837920688869376/KKtiQ1hY_400x400.jpg",
+      "image": "https://pbs.twimg.com/profile_images/1233016078902624256/Yh4cWtyk_400x400.jpg",
       "twitter": "Akryum",
       "github": "Akryum"
     },
     {
       "id": "bneqe0dcq",
       "name": "Eduardo San Martin Morote",
-      "image": "https://pbs.twimg.com/profile_images/1207800596058628101/BRm6o3my_400x400.jpg",
+      "image": "https://pbs.twimg.com/profile_images/1263046393486356486/TEuM0IAV_400x400.jpg",
       "twitter": "posva",
       "github": "posva"
     },
     {
       "id": "Jq2uzIh4u",
       "name": "Sarah Drasner",
-      "image": "https://pbs.twimg.com/profile_images/1160342217837436928/VR_zqvk1_400x400.jpg",
+      "image": "https://pbs.twimg.com/profile_images/1225613270205091840/NyoNYuhC_400x400.jpg",
       "twitter": "sarah_edo",
       "github": "sdras"
     },
@@ -36,11 +36,18 @@
       "github": "LinusBorg"
     },
     {
-      "id": "qeu7fPtVb",
-      "name": "Chris Fritz",
-      "image": "https://pbs.twimg.com/profile_images/1030930265240162305/-b6cwxVU_400x400.jpg",
-      "twitter": "chrisvfritz",
-      "github": "chrisvfritz"
+      "id": "RX5Qbnf4z",
+      "name": "Haoqun Jiang",
+      "image": "https://pbs.twimg.com/profile_images/460836761199845376/dhdpOXCw_400x400.jpeg",
+      "twitter": "haoqunjiang",
+      "github": "sodatea"
+    },
+    {
+      "id": "CgplNv299",
+      "name": "Kazuya Kawaguchi",
+      "image": "https://pbs.twimg.com/profile_images/1151694505298411520/7iI5124P_400x400.png",
+      "twitter": "kazu_pon",
+      "github": "kazupon"
     }
   ]
 }
