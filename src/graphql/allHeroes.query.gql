@@ -1,7 +1,9 @@
-#import "./hero.fragment.gql"
-
 query AllHeroes {
   allHeroes {
-    ...HeroFragment
+    id
+    name
+    twitter
+    github
+    image
   }
 }

@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import { VApp, VToolbar, VToolbarTitle } from 'vuetify'
 import VueHero from './components/VueHero'
 import allHeroesQuery from './graphql/allHeroes.query.gql'
 import addHeroMutation from './graphql/addHero.mutation.gql'

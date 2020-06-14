@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component renders a list of two characters 1`] = `
+<v-app-stub id="app">
+  <v-toolbar-stub fixed="true" app="true" color="teal darken-2" dark="true" scrollthreshold="300"><img src="./assets/vue-graphql.png" alt="Logo" class="logo">
+    <v-toolbar-title-stub class="hidden-xs-only">Vue Heroes</v-toolbar-title-stub>
+  </v-toolbar-stub>
+  <v-content-stub tag="main" class="teal lighten-3">
+    <v-container-stub tag="div" fluid="" fill-height="" grid-list-md="" class="app-container white">
+      <div>
+        Loading...
+      </div>
+    </v-container-stub>
+  </v-content-stub>
+  <v-footer-stub app="true" color="teal darken-2" height="32"><span class="footer-text text-xs-center white--text">© 2019</span></v-footer-stub>
+</v-app-stub>
+`;
+
+exports[`App component renders a loading block 1`] = `
+<v-app-stub id="app">
+  <v-toolbar-stub fixed="true" app="true" color="teal darken-2" dark="true" scrollthreshold="300"><img src="./assets/vue-graphql.png" alt="Logo" class="logo">
+    <v-toolbar-title-stub class="hidden-xs-only">Vue Heroes</v-toolbar-title-stub>
+  </v-toolbar-stub>
+  <v-content-stub tag="main" class="teal lighten-3">
+    <v-container-stub tag="div" fluid="" fill-height="" grid-list-md="" class="app-container white">
+      <div>
+        Loading...
+      </div>
+    </v-container-stub>
+  </v-content-stub>
+  <v-footer-stub app="true" color="teal darken-2" height="32"><span class="footer-text text-xs-center white--text">© 2019</span></v-footer-stub>
+</v-app-stub>
+`;

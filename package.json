@@ -12,7 +12,7 @@
     "apollo:start": "vue-cli-service apollo:start"
   },
   "dependencies": {
-    "core-js": "^2.6.5",
+    "core-js": "^3.6.5",
     "graphql-type-json": "^0.2.1",
     "lowdb": "^1.0.0",
     "shortid": "^2.2.14",
@@ -21,12 +21,13 @@
     "vuetify": "^1.5.16"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.9.0",
+    "@vue/cli-plugin-babel": "~4.4.4",
     "@vue/cli-plugin-unit-jest": "~4.4.0",
-    "@vue/cli-service": "^3.9.0",
+    "@vue/cli-service": "~4.4.4",
     "@vue/test-utils": "^1.0.3",
     "graphql-tag": "^2.9.0",
     "jest-transform-graphql": "^2.1.0",
+    "mock-apollo-client": "^0.4.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-apollo": "^0.21.0",

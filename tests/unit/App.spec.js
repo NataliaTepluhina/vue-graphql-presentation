@@ -1,5 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import VueApollo from 'vue-apollo'
+import Vuetify from 'vuetify'
 import AppComponent from '@/App.vue'
 import { createMockClient } from 'mock-apollo-client'
 import allHeroesQuery from '@/graphql/allHeroes.query.gql'
@@ -35,6 +36,7 @@ const newHeroMock = {
 
 const localVue = createLocalVue()
 localVue.use(VueApollo)
+localVue.use(Vuetify)
 
 describe('App component', () => {
   let wrapper
@@ -69,9 +71,9 @@ describe('App component', () => {
     apolloProvider = null
   })
 
-  it('renders a list of two characters', () => {
+  it('renders a loading block', () => {
     createComponent()
 
-    expect(wrapper.html).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

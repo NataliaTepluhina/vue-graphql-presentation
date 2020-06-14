@@ -1,7 +1,9 @@
-#import "./hero.fragment.gql"
-
 mutation AddHero($hero: HeroInput!) {
   addHero(hero: $hero) {
-    ...HeroFragment
+    id
+    name
+    twitter
+    github
+    image
   }
 }
