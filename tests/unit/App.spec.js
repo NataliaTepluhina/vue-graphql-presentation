@@ -4,6 +4,7 @@ import Vuetify from 'vuetify'
 import AppComponent from '@/App.vue'
 import { createMockClient } from 'mock-apollo-client'
 import allHeroesQuery from '@/graphql/allHeroes.query.gql'
+import VueHero from '@/components/VueHero'
 
 const heroListMock = {
   data: {
@@ -43,13 +44,13 @@ describe('App component', () => {
   let mockClient
   let apolloProvider
 
-  const createComponent = (
-    requestHandlers = {
+  const createComponent = (handlers) => {
+    const requestHandlers = {
       allHeroesQueryHandler: jest.fn().mockResolvedValue(heroListMock),
       addHeroMutationHandler: jest.fn().mockResolvedValue(newHeroMock),
       deleteHeroMutation: jest.fn().mockResolvedValue(true),
+      ...handlers,
     }
-  ) => {
     mockClient = createMockClient()
     mockClient.setRequestHandler(
       allHeroesQuery,
@@ -71,9 +72,49 @@ describe('App component', () => {
     apolloProvider = null
   })
 
-  it('renders a loading block', () => {
+  it('renders a loading block when query is in progress', () => {
     createComponent()
 
+    expect(wrapper.find('.test-loading').exists()).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('renders a list of two heroes when query is resolved', async () => {
+    createComponent()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.test-loading').exists()).toBe(false)
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.findAllComponents(VueHero)).toHaveLength(2)
+  })
+
+  it('renders a message about no heroes when heroes list is empty', async () => {
+    createComponent({
+      allHeroesQueryHandler: jest
+        .fn()
+        .mockResolvedValue({ data: { allHeroes: [] } }),
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.test-loading').exists()).toBe(false)
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.test-empty-list').exists()).toBe(true)
+  })
+
+  it('renders error if query fails', async () => {
+    createComponent({
+      allHeroesQueryHandler: jest
+        .fn()
+        .mockRejectedValue(new Error('GraphQL error')),
+    })
+
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.test-loading').exists()).toBe(false)
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.test-error').exists()).toBe(true)
   })
 })

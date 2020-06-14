@@ -6,14 +6,14 @@
     </v-toolbar>
     <v-content class="teal lighten-3">
       <v-container fluid class="app-container white" fill-height grid-list-md>
-        <h2 v-if="queryError">
+        <h2 v-if="queryError" class="test-error">
           Something went wrong. Please try again in a minute
         </h2>
-        <div v-else-if="$apollo.queries.allHeroes.loading">
+        <div v-else-if="$apollo.queries.allHeroes.loading" class="test-loading">
           Loading...
         </div>
         <template v-else>
-          <v-layout class="hero-cards-layout" wrap>
+          <v-layout class="hero-cards-layout test-heroes-list" wrap>
             <vue-hero
               v-for="hero in allHeroes"
               :hero="hero"
@@ -26,7 +26,7 @@
               </v-card>
             </v-flex>
           </v-layout>
-          <h3 class="headline" v-if="allHeroes.length === 0">
+          <h3 class="headline test-empty-list" v-if="allHeroes.length === 0">
             No heroes found 😭
           </h3>
           <v-dialog v-model="dialog" width="800">

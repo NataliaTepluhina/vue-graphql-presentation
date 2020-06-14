@@ -1,13 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App component renders a list of two characters 1`] = `
+exports[`App component renders a list of two heroes when query is resolved 1`] = `
 <v-app-stub id="app">
   <v-toolbar-stub fixed="true" app="true" color="teal darken-2" dark="true" scrollthreshold="300"><img src="./assets/vue-graphql.png" alt="Logo" class="logo">
     <v-toolbar-title-stub class="hidden-xs-only">Vue Heroes</v-toolbar-title-stub>
   </v-toolbar-stub>
   <v-content-stub tag="main" class="teal lighten-3">
     <v-container-stub tag="div" fluid="" fill-height="" grid-list-md="" class="app-container white">
-      <div>
+      <v-layout-stub tag="div" wrap="" class="hero-cards-layout test-heroes-list">
+        <vue-hero-stub hero="[object Object]"></vue-hero-stub>
+        <vue-hero-stub hero="[object Object]"></vue-hero-stub>
+        <!---->
+      </v-layout-stub>
+      <!---->
+      <v-dialog-stub contentclass="" maxwidth="none" origin="center center" width="800" transition="dialog-transition">
+        <v-btn-stub color="teal" activeclass="v-btn--active" tag="button" dark="true" type="button">Add Hero</v-btn-stub>
+        <v-card-stub tag="div" class="dialog-form">
+          <v-form-stub>
+            <v-text-field-stub rules="v => !!v || 'Name is required'" label="Name" required="" value=""></v-text-field-stub>
+            <v-text-field-stub label="Image Link" value=""></v-text-field-stub>
+            <v-text-field-stub label="Twitter" value=""></v-text-field-stub>
+            <v-text-field-stub label="Github" value=""></v-text-field-stub>
+          </v-form-stub>
+          <v-card-actions-stub>
+            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button">submit</v-btn-stub>
+          </v-card-actions-stub>
+        </v-card-stub>
+      </v-dialog-stub>
+    </v-container-stub>
+  </v-content-stub>
+  <v-footer-stub app="true" color="teal darken-2" height="32"><span class="footer-text text-xs-center white--text">© 2019</span></v-footer-stub>
+</v-app-stub>
+`;
+
+exports[`App component renders a loading block when query is in progress 1`] = `
+<v-app-stub id="app">
+  <v-toolbar-stub fixed="true" app="true" color="teal darken-2" dark="true" scrollthreshold="300"><img src="./assets/vue-graphql.png" alt="Logo" class="logo">
+    <v-toolbar-title-stub class="hidden-xs-only">Vue Heroes</v-toolbar-title-stub>
+  </v-toolbar-stub>
+  <v-content-stub tag="main" class="teal lighten-3">
+    <v-container-stub tag="div" fluid="" fill-height="" grid-list-md="" class="app-container white">
+      <div class="test-loading">
         Loading...
       </div>
     </v-container-stub>
@@ -16,16 +49,49 @@ exports[`App component renders a list of two characters 1`] = `
 </v-app-stub>
 `;
 
-exports[`App component renders a loading block 1`] = `
+exports[`App component renders a message about no heroes when heroes list is empty 1`] = `
 <v-app-stub id="app">
   <v-toolbar-stub fixed="true" app="true" color="teal darken-2" dark="true" scrollthreshold="300"><img src="./assets/vue-graphql.png" alt="Logo" class="logo">
     <v-toolbar-title-stub class="hidden-xs-only">Vue Heroes</v-toolbar-title-stub>
   </v-toolbar-stub>
   <v-content-stub tag="main" class="teal lighten-3">
     <v-container-stub tag="div" fluid="" fill-height="" grid-list-md="" class="app-container white">
-      <div>
-        Loading...
-      </div>
+      <v-layout-stub tag="div" wrap="" class="hero-cards-layout test-heroes-list">
+        <!---->
+      </v-layout-stub>
+      <h3 class="headline test-empty-list">
+        No heroes found 😭
+      </h3>
+      <v-dialog-stub contentclass="" maxwidth="none" origin="center center" width="800" transition="dialog-transition">
+        <v-btn-stub color="teal" activeclass="v-btn--active" tag="button" dark="true" type="button">Add Hero</v-btn-stub>
+        <v-card-stub tag="div" class="dialog-form">
+          <v-form-stub>
+            <v-text-field-stub rules="v => !!v || 'Name is required'" label="Name" required="" value=""></v-text-field-stub>
+            <v-text-field-stub label="Image Link" value=""></v-text-field-stub>
+            <v-text-field-stub label="Twitter" value=""></v-text-field-stub>
+            <v-text-field-stub label="Github" value=""></v-text-field-stub>
+          </v-form-stub>
+          <v-card-actions-stub>
+            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button">submit</v-btn-stub>
+          </v-card-actions-stub>
+        </v-card-stub>
+      </v-dialog-stub>
+    </v-container-stub>
+  </v-content-stub>
+  <v-footer-stub app="true" color="teal darken-2" height="32"><span class="footer-text text-xs-center white--text">© 2019</span></v-footer-stub>
+</v-app-stub>
+`;
+
+exports[`App component renders error if query fails 1`] = `
+<v-app-stub id="app">
+  <v-toolbar-stub fixed="true" app="true" color="teal darken-2" dark="true" scrollthreshold="300"><img src="./assets/vue-graphql.png" alt="Logo" class="logo">
+    <v-toolbar-title-stub class="hidden-xs-only">Vue Heroes</v-toolbar-title-stub>
+  </v-toolbar-stub>
+  <v-content-stub tag="main" class="teal lighten-3">
+    <v-container-stub tag="div" fluid="" fill-height="" grid-list-md="" class="app-container white">
+      <h2 class="test-error">
+        Something went wrong. Please try again in a minute
+      </h2>
     </v-container-stub>
   </v-content-stub>
   <v-footer-stub app="true" color="teal darken-2" height="32"><span class="footer-text text-xs-center white--text">© 2019</span></v-footer-stub>
