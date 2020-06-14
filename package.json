@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
     "apollo": "vue-cli-service apollo:dev --generate-schema",
     "apollo:schema:generate": "vue-cli-service apollo:schema:generate",
     "apollo:schema:publish": "vue-cli-service apollo:schema:publish",
@@ -21,7 +22,9 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",
+    "@vue/cli-plugin-unit-jest": "~4.4.0",
     "@vue/cli-service": "^3.9.0",
+    "@vue/test-utils": "^1.0.3",
     "graphql-tag": "^2.9.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",

@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import VueHero from "./components/VueHero";
-import gql from "graphql-tag";
+import VueHero from './components/VueHero'
+import gql from 'graphql-tag'
 
 const heroFragment = gql`
   fragment HeroFragment on Hero {
@@ -62,7 +62,7 @@ const heroFragment = gql`
     github
     image
   }
-`;
+`
 
 const allHeroesQuery = gql`
   query AllHeroes {
@@ -71,7 +71,7 @@ const allHeroesQuery = gql`
     }
   }
   ${heroFragment}
-`;
+`
 
 const addHeroMutation = gql`
   mutation AddHero($hero: HeroInput!) {
@@ -80,36 +80,36 @@ const addHeroMutation = gql`
     }
   }
   ${heroFragment}
-`;
+`
 
 const deleteHeroMutation = gql`
   mutation DeleteHero($name: String!) {
     deleteHero(name: $name)
   }
-`;
+`
 
 export default {
-  name: "app",
+  name: 'app',
   data() {
     return {
       valid: false,
       dialog: false,
-      name: "",
-      nameRules: [v => !!v || "Name is required"],
-      image: "",
-      github: "",
-      twitter: "",
+      name: '',
+      nameRules: [(v) => !!v || 'Name is required'],
+      image: '',
+      github: '',
+      twitter: '',
       allHeroes: [],
-      isSaving: false
-    };
+      isSaving: false,
+    }
   },
   components: {
-    VueHero
+    VueHero,
   },
   apollo: {
     allHeroes: {
-      query: allHeroesQuery
-    }
+      query: allHeroesQuery,
+    },
   },
   methods: {
     addHero() {
@@ -117,46 +117,46 @@ export default {
         name: this.name,
         image: this.image,
         twitter: this.twitter,
-        github: this.github
-      };
-      this.dialog = false;
-      this.name = "";
-      this.image = "";
-      this.github = "";
-      this.twitter = "";
-      this.isSaving = true;
+        github: this.github,
+      }
+      this.dialog = false
+      this.name = ''
+      this.image = ''
+      this.github = ''
+      this.twitter = ''
+      this.isSaving = true
       this.$apollo
         .mutate({
           mutation: addHeroMutation,
           variables: {
-            hero
+            hero,
           },
           update: (store, { data: { addHero } }) => {
-            const data = store.readQuery({ query: allHeroesQuery });
-            data.allHeroes.push(addHero);
-            store.writeQuery({ query: allHeroesQuery, data });
-          }
+            const data = store.readQuery({ query: allHeroesQuery })
+            data.allHeroes.push(addHero)
+            store.writeQuery({ query: allHeroesQuery, data })
+          },
         })
         .finally(() => {
-          this.isSaving = false;
-        });
+          this.isSaving = false
+        })
     },
     deleteHero(name) {
       this.$apollo.mutate({
         mutation: deleteHeroMutation,
         variables: {
-          name
+          name,
         },
-        update: store => {
-          const data = store.readQuery({ query: allHeroesQuery });
-          const heroToDelete = data.allHeroes.find(hero => hero.name === name);
-          data.allHeroes.splice(data.allHeroes.indexOf(heroToDelete), 1);
-          store.writeQuery({ query: allHeroesQuery, data });
-        }
-      });
-    }
-  }
-};
+        update: (store) => {
+          const data = store.readQuery({ query: allHeroesQuery })
+          const heroToDelete = data.allHeroes.find((hero) => hero.name === name)
+          data.allHeroes.splice(data.allHeroes.indexOf(heroToDelete), 1)
+          store.writeQuery({ query: allHeroesQuery, data })
+        },
+      })
+    },
+  },
+}
 </script>
 
 <style lang="scss">
