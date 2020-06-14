@@ -26,6 +26,7 @@
     "@vue/cli-service": "^3.9.0",
     "@vue/test-utils": "^1.0.3",
     "graphql-tag": "^2.9.0",
+    "jest-transform-graphql": "^2.1.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-apollo": "^0.21.0",

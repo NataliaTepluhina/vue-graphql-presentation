@@ -6,42 +6,49 @@
     </v-toolbar>
     <v-content class="teal lighten-3">
       <v-container fluid class="app-container white" fill-height grid-list-md>
-        <div v-if="$apollo.queries.allHeroes.loading">
+        <h2 v-if="queryError">
+          Something went wrong. Please try again in a minute
+        </h2>
+        <div v-else-if="$apollo.queries.allHeroes.loading">
           Loading...
         </div>
-        <v-layout v-else class="hero-cards-layout" wrap>
-          <vue-hero
-            v-for="hero in allHeroes"
-            :hero="hero"
-            @deleteHero="deleteHero($event)"
-            :key="hero.name"
-          ></vue-hero>
-          <v-flex md3 xs12 v-if="isSaving">
-            <v-card height="100%" class="centered">
-              <v-progress-circular indeterminate></v-progress-circular>
+        <template v-else>
+          <v-layout class="hero-cards-layout" wrap>
+            <vue-hero
+              v-for="hero in allHeroes"
+              :hero="hero"
+              @deleteHero="deleteHero($event)"
+              :key="hero.name"
+            ></vue-hero>
+            <v-flex md3 xs12 v-if="isSaving">
+              <v-card height="100%" class="centered">
+                <v-progress-circular indeterminate></v-progress-circular>
+              </v-card>
+            </v-flex>
+          </v-layout>
+          <h3 class="headline" v-if="allHeroes.length === 0">
+            No heroes found 😭
+          </h3>
+          <v-dialog v-model="dialog" width="800">
+            <v-btn slot="activator" color="teal" dark>Add Hero</v-btn>
+            <v-card class="dialog-form">
+              <v-form v-model="valid">
+                <v-text-field
+                  v-model="name"
+                  :rules="nameRules"
+                  label="Name"
+                  required
+                ></v-text-field>
+                <v-text-field v-model="image" label="Image Link"></v-text-field>
+                <v-text-field v-model="twitter" label="Twitter"></v-text-field>
+                <v-text-field v-model="github" label="Github"></v-text-field>
+              </v-form>
+              <v-card-actions>
+                <v-btn :disabled="!valid" @click="addHero">submit</v-btn>
+              </v-card-actions>
             </v-card>
-          </v-flex>
-        </v-layout>
-        <v-dialog v-model="dialog" width="800" v-if="allHeroes.length">
-          <v-btn slot="activator" color="teal" dark>Add Hero</v-btn>
-          <v-card class="dialog-form">
-            <v-form v-model="valid">
-              <v-text-field
-                v-model="name"
-                :rules="nameRules"
-                label="Name"
-                required
-              ></v-text-field>
-              <v-text-field v-model="image" label="Image Link"></v-text-field>
-              <v-text-field v-model="twitter" label="Twitter"></v-text-field>
-              <v-text-field v-model="github" label="Github"></v-text-field>
-            </v-form>
-            <v-card-actions>
-              <v-btn :disabled="!valid" @click="addHero">submit</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <h3 class="headline" v-else>No heroes found 😭</h3>
+          </v-dialog>
+        </template>
       </v-container>
     </v-content>
     <v-footer color="teal darken-2" app>
@@ -69,6 +76,7 @@ export default {
       twitter: '',
       allHeroes: [],
       isSaving: false,
+      queryError: null,
     }
   },
   components: {
@@ -77,6 +85,9 @@ export default {
   apollo: {
     allHeroes: {
       query: allHeroesQuery,
+      error(e) {
+        this.queryError = true
+      },
     },
   },
   methods: {
