@@ -4,6 +4,8 @@ import Vuetify from 'vuetify'
 import AppComponent from '@/App.vue'
 import { createMockClient } from 'mock-apollo-client'
 import allHeroesQuery from '@/graphql/allHeroes.query.gql'
+import addHeroMutation from '@/graphql/addHero.mutation.gql'
+import deleteHeroMutation from '@/graphql/deleteHero.mutation.gql'
 import VueHero from '@/components/VueHero'
 
 const heroListMock = {
@@ -28,11 +30,20 @@ const heroListMock = {
 }
 
 const newHeroMock = {
-  id: '123',
   name: 'New Hero',
   github: '1000-contributions-a-day',
   twitter: 'new-hero',
   image: 'img.jpg',
+}
+
+const newHeroMockResponse = {
+  data: {
+    addHero: {
+      __typename: 'Hero',
+      id: '123',
+      ...newHeroMock,
+    },
+  },
 }
 
 const localVue = createLocalVue()
@@ -43,18 +54,29 @@ describe('App component', () => {
   let wrapper
   let mockClient
   let apolloProvider
+  let requestHandlers
 
   const createComponent = (handlers) => {
-    const requestHandlers = {
+    requestHandlers = {
       allHeroesQueryHandler: jest.fn().mockResolvedValue(heroListMock),
-      addHeroMutationHandler: jest.fn().mockResolvedValue(newHeroMock),
-      deleteHeroMutation: jest.fn().mockResolvedValue(true),
+      addHeroMutationHandler: jest.fn().mockResolvedValue(newHeroMockResponse),
+      deleteHeroMutationHandler: jest
+        .fn()
+        .mockResolvedValue({ data: { deleteHero: true } }),
       ...handlers,
     }
     mockClient = createMockClient()
     mockClient.setRequestHandler(
       allHeroesQuery,
       requestHandlers.allHeroesQueryHandler
+    )
+    mockClient.setRequestHandler(
+      addHeroMutation,
+      requestHandlers.addHeroMutationHandler
+    )
+    mockClient.setRequestHandler(
+      deleteHeroMutation,
+      requestHandlers.deleteHeroMutationHandler
     )
 
     apolloProvider = new VueApollo({
@@ -116,5 +138,63 @@ describe('App component', () => {
     expect(wrapper.find('.test-loading').exists()).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.find('.test-error').exists()).toBe(true)
+  })
+
+  it('adds a new hero to cache on addHero mutation', async () => {
+    createComponent()
+    wrapper.setData({
+      ...newHeroMock,
+    })
+
+    await wrapper.vm.$nextTick()
+    wrapper.vm.addHero()
+
+    expect(requestHandlers.addHeroMutationHandler).toHaveBeenCalledWith({
+      hero: {
+        ...newHeroMock,
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(
+      mockClient.cache.readQuery({ query: allHeroesQuery }).allHeroes
+    ).toHaveLength(3)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.findAllComponents(VueHero)).toHaveLength(3)
+  })
+
+  it('deletes a hero from cache correctly', async () => {
+    createComponent()
+
+    await wrapper.vm.$nextTick()
+
+    wrapper
+      .findAllComponents(VueHero)
+      .at(0)
+      .vm.$emit('deleteHero', heroListMock.data.allHeroes[0].name)
+
+    expect(requestHandlers.deleteHeroMutationHandler).toHaveBeenCalledWith({
+      name: 'Anonymous Vue Hero',
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(
+      mockClient.cache.readQuery({ query: allHeroesQuery }).allHeroes
+    ).toHaveLength(1)
+    expect(
+      mockClient.cache
+        .readQuery({ query: allHeroesQuery })
+        .allHeroes.some((hero) => hero.name === 'Anonymous Vue Hero')
+    ).toBe(false)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.findAllComponents(VueHero)).toHaveLength(1)
   })
 })

@@ -1,5 +1,75 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`App component adds a new hero to cache on addHero mutation 1`] = `
+<v-app-stub id="app">
+  <v-toolbar-stub fixed="true" app="true" color="teal darken-2" dark="true" scrollthreshold="300"><img src="./assets/vue-graphql.png" alt="Logo" class="logo">
+    <v-toolbar-title-stub class="hidden-xs-only">Vue Heroes</v-toolbar-title-stub>
+  </v-toolbar-stub>
+  <v-content-stub tag="main" class="teal lighten-3">
+    <v-container-stub tag="div" fluid="" fill-height="" grid-list-md="" class="app-container white">
+      <v-layout-stub tag="div" wrap="" class="hero-cards-layout test-heroes-list">
+        <vue-hero-stub hero="[object Object]"></vue-hero-stub>
+        <vue-hero-stub hero="[object Object]"></vue-hero-stub>
+        <vue-hero-stub hero="[object Object]"></vue-hero-stub>
+        <v-flex-stub tag="div" md3="" xs12="">
+          <v-card-stub tag="div" height="100%" class="centered test-saving">
+            <v-progress-circular-stub indeterminate="true" rotate="0" size="32" width="4" value="0"></v-progress-circular-stub>
+          </v-card-stub>
+        </v-flex-stub>
+      </v-layout-stub>
+      <!---->
+      <v-dialog-stub contentclass="" maxwidth="none" origin="center center" width="800" transition="dialog-transition">
+        <v-btn-stub color="teal" activeclass="v-btn--active" tag="button" dark="true" type="button">Add Hero</v-btn-stub>
+        <v-card-stub tag="div" class="dialog-form">
+          <v-form-stub>
+            <v-text-field-stub rules="v => !!v || 'Name is required'" label="Name" required="" value=""></v-text-field-stub>
+            <v-text-field-stub label="Image Link" value=""></v-text-field-stub>
+            <v-text-field-stub label="Twitter" value=""></v-text-field-stub>
+            <v-text-field-stub label="Github" value=""></v-text-field-stub>
+          </v-form-stub>
+          <v-card-actions-stub>
+            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button">submit</v-btn-stub>
+          </v-card-actions-stub>
+        </v-card-stub>
+      </v-dialog-stub>
+    </v-container-stub>
+  </v-content-stub>
+  <v-footer-stub app="true" color="teal darken-2" height="32"><span class="footer-text text-xs-center white--text">© 2019</span></v-footer-stub>
+</v-app-stub>
+`;
+
+exports[`App component deletes a hero from cache correctly 1`] = `
+<v-app-stub id="app">
+  <v-toolbar-stub fixed="true" app="true" color="teal darken-2" dark="true" scrollthreshold="300"><img src="./assets/vue-graphql.png" alt="Logo" class="logo">
+    <v-toolbar-title-stub class="hidden-xs-only">Vue Heroes</v-toolbar-title-stub>
+  </v-toolbar-stub>
+  <v-content-stub tag="main" class="teal lighten-3">
+    <v-container-stub tag="div" fluid="" fill-height="" grid-list-md="" class="app-container white">
+      <v-layout-stub tag="div" wrap="" class="hero-cards-layout test-heroes-list">
+        <vue-hero-stub hero="[object Object]"></vue-hero-stub>
+        <!---->
+      </v-layout-stub>
+      <!---->
+      <v-dialog-stub contentclass="" maxwidth="none" origin="center center" width="800" transition="dialog-transition">
+        <v-btn-stub color="teal" activeclass="v-btn--active" tag="button" dark="true" type="button">Add Hero</v-btn-stub>
+        <v-card-stub tag="div" class="dialog-form">
+          <v-form-stub>
+            <v-text-field-stub rules="v => !!v || 'Name is required'" label="Name" required="" value=""></v-text-field-stub>
+            <v-text-field-stub label="Image Link" value=""></v-text-field-stub>
+            <v-text-field-stub label="Twitter" value=""></v-text-field-stub>
+            <v-text-field-stub label="Github" value=""></v-text-field-stub>
+          </v-form-stub>
+          <v-card-actions-stub>
+            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button">submit</v-btn-stub>
+          </v-card-actions-stub>
+        </v-card-stub>
+      </v-dialog-stub>
+    </v-container-stub>
+  </v-content-stub>
+  <v-footer-stub app="true" color="teal darken-2" height="32"><span class="footer-text text-xs-center white--text">© 2019</span></v-footer-stub>
+</v-app-stub>
+`;
+
 exports[`App component renders a list of two heroes when query is resolved 1`] = `
 <v-app-stub id="app">
   <v-toolbar-stub fixed="true" app="true" color="teal darken-2" dark="true" scrollthreshold="300"><img src="./assets/vue-graphql.png" alt="Logo" class="logo">

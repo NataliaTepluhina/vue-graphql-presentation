@@ -21,7 +21,7 @@
               :key="hero.name"
             ></vue-hero>
             <v-flex md3 xs12 v-if="isSaving">
-              <v-card height="100%" class="centered">
+              <v-card height="100%" class="centered test-saving">
                 <v-progress-circular indeterminate></v-progress-circular>
               </v-card>
             </v-flex>
@@ -111,7 +111,7 @@ export default {
           variables: {
             hero,
           },
-          update: (store, { data: { addHero } }) => {
+          update(store, { data: { addHero } }) {
             const data = store.readQuery({ query: allHeroesQuery })
             data.allHeroes.push(addHero)
             store.writeQuery({ query: allHeroesQuery, data })
