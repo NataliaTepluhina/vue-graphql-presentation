@@ -56,7 +56,7 @@ describe('App component', () => {
   let apolloProvider
   let requestHandlers
 
-  const createComponent = (handlers) => {
+  const createComponent = (handlers, data) => {
     requestHandlers = {
       allHeroesQueryHandler: jest.fn().mockResolvedValue(heroListMock),
       addHeroMutationHandler: jest.fn().mockResolvedValue(newHeroMockResponse),
@@ -85,6 +85,11 @@ describe('App component', () => {
     wrapper = shallowMount(AppComponent, {
       localVue,
       apolloProvider,
+      data() {
+        return {
+          ...data,
+        }
+      },
     })
   }
 
@@ -141,12 +146,7 @@ describe('App component', () => {
   })
 
   it('adds a new hero to cache on addHero mutation', async () => {
-    createComponent()
-    wrapper.setData({
-      ...newHeroMock,
-    })
-
-    await wrapper.vm.$nextTick()
+    createComponent({}, { ...newHeroMock })
     wrapper.vm.addHero()
 
     expect(requestHandlers.addHeroMutationHandler).toHaveBeenCalledWith({
