@@ -28,7 +28,7 @@ exports[`App component adds a new hero to cache on addHero mutation 1`] = `
             <v-text-field-stub label="Github" value=""></v-text-field-stub>
           </v-form-stub>
           <v-card-actions-stub>
-            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button">submit</v-btn-stub>
+            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button" class="test-submit">submit</v-btn-stub>
           </v-card-actions-stub>
         </v-card-stub>
       </v-dialog-stub>
@@ -60,7 +60,7 @@ exports[`App component deletes a hero from cache correctly 1`] = `
             <v-text-field-stub label="Github" value=""></v-text-field-stub>
           </v-form-stub>
           <v-card-actions-stub>
-            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button">submit</v-btn-stub>
+            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button" class="test-submit">submit</v-btn-stub>
           </v-card-actions-stub>
         </v-card-stub>
       </v-dialog-stub>
@@ -93,7 +93,7 @@ exports[`App component renders a list of two heroes when query is resolved 1`] =
             <v-text-field-stub label="Github" value=""></v-text-field-stub>
           </v-form-stub>
           <v-card-actions-stub>
-            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button">submit</v-btn-stub>
+            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button" class="test-submit">submit</v-btn-stub>
           </v-card-actions-stub>
         </v-card-stub>
       </v-dialog-stub>
@@ -142,7 +142,7 @@ exports[`App component renders a message about no heroes when heroes list is emp
             <v-text-field-stub label="Github" value=""></v-text-field-stub>
           </v-form-stub>
           <v-card-actions-stub>
-            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button">submit</v-btn-stub>
+            <v-btn-stub activeclass="v-btn--active" disabled="true" tag="button" type="button" class="test-submit">submit</v-btn-stub>
           </v-card-actions-stub>
         </v-card-stub>
       </v-dialog-stub>

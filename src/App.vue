@@ -44,7 +44,9 @@
                 <v-text-field v-model="github" label="Github"></v-text-field>
               </v-form>
               <v-card-actions>
-                <v-btn :disabled="!valid" @click="addHero">submit</v-btn>
+                <v-btn :disabled="!valid" class="test-submit" @click="addHero"
+                  >submit</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-dialog>

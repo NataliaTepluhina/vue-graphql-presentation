@@ -8,6 +8,7 @@ import addHeroMutation from '@/graphql/addHero.mutation.gql'
 import deleteHeroMutation from '@/graphql/deleteHero.mutation.gql'
 import VueHero from '@/components/VueHero'
 
+// We create a mock for successful query response
 const heroListMock = {
   data: {
     allHeroes: [
@@ -29,6 +30,7 @@ const heroListMock = {
   },
 }
 
+// This will be passed as a parameter to addHero mutation
 const newHeroMock = {
   name: 'New Hero',
   github: '1000-contributions-a-day',
@@ -36,6 +38,9 @@ const newHeroMock = {
   image: 'img.jpg',
 }
 
+// Successfull addHero mutation response
+// IMPORTANT: always mock mutation responses with exactly the shape matching schema
+// I.e. { data: { addHero: ... } }
 const newHeroMockResponse = {
   data: {
     addHero: {
@@ -57,6 +62,7 @@ describe('App component', () => {
   let requestHandlers
 
   const createComponent = (handlers, data) => {
+    // We want to specify default handlers for different operations and overwrite them with passed handlers
     requestHandlers = {
       allHeroesQueryHandler: jest.fn().mockResolvedValue(heroListMock),
       addHeroMutationHandler: jest.fn().mockResolvedValue(newHeroMockResponse),
@@ -65,7 +71,11 @@ describe('App component', () => {
         .mockResolvedValue({ data: { deleteHero: true } }),
       ...handlers,
     }
+
     mockClient = createMockClient()
+
+    // Unfortunately, it's not possible to override handler already set
+    // So we need to do all the work for setting handlers in the factory
     mockClient.setRequestHandler(
       allHeroesQuery,
       requestHandlers.allHeroesQueryHandler
@@ -137,6 +147,7 @@ describe('App component', () => {
         .mockRejectedValue(new Error('GraphQL error')),
     })
 
+    // For some reason, when we reject the promise, it requires +1 tick to render an error
     await wrapper.vm.$nextTick()
     await wrapper.vm.$nextTick()
 
@@ -146,8 +157,12 @@ describe('App component', () => {
   })
 
   it('adds a new hero to cache on addHero mutation', async () => {
-    createComponent({}, { ...newHeroMock })
-    wrapper.vm.addHero()
+    createComponent({}, { ...newHeroMock, dialog: true })
+
+    // Waiting for query promise to resolve and populate data
+    await wrapper.vm.$nextTick()
+
+    wrapper.find('.test-submit').vm.$emit('click')
 
     expect(requestHandlers.addHeroMutationHandler).toHaveBeenCalledWith({
       hero: {
@@ -155,12 +170,14 @@ describe('App component', () => {
       },
     })
 
+    // We wait for promise to resolve
     await wrapper.vm.$nextTick()
 
     expect(
       mockClient.cache.readQuery({ query: allHeroesQuery }).allHeroes
     ).toHaveLength(3)
 
+    // We wait for one more tick for component to re-render updated cache data
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -170,6 +187,7 @@ describe('App component', () => {
   it('deletes a hero from cache correctly', async () => {
     createComponent()
 
+    // Waiting for query promise to resolve and populate data
     await wrapper.vm.$nextTick()
 
     wrapper
