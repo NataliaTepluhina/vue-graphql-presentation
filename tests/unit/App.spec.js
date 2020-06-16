@@ -170,7 +170,7 @@ describe('App component', () => {
       },
     })
 
-    // We wait for promise to resolve
+    // We wait for mutation promise to resolve and then we check if new hero is added to cache
     await wrapper.vm.$nextTick()
 
     expect(
