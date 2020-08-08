@@ -1,0 +1,8 @@
+fragment HeroFragment on Hero {
+  __typename
+  id
+  name
+  twitter
+  github
+  image
+}

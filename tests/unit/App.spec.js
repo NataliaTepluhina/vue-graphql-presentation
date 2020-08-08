@@ -1,4 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
 import Vuetify from 'vuetify'
 import AppComponent from '@/App.vue'
@@ -13,6 +14,7 @@ const heroListMock = {
   data: {
     allHeroes: [
       {
+        __typename: 'Hero',
         github: 'test-github',
         id: '-1',
         image: 'image-link',
@@ -20,6 +22,7 @@ const heroListMock = {
         twitter: 'some-twitter',
       },
       {
+        __typename: 'Hero',
         github: 'test-github2',
         id: '-2',
         image: 'image-link2',
