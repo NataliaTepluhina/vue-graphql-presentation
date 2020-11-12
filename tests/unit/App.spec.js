@@ -6,6 +6,7 @@ import { createMockClient } from 'mock-apollo-client'
 import allHeroesQuery from '@/graphql/allHeroes.query.gql'
 import addHeroMutation from '@/graphql/addHero.mutation.gql'
 import deleteHeroMutation from '@/graphql/deleteHero.mutation.gql'
+import localTestQuery from '@/graphql/localTest.query.gql'
 import VueHero from '@/components/VueHero'
 
 // We create a mock for successful query response
@@ -78,9 +79,13 @@ describe('App component', () => {
       resolvers: {},
     })
 
-    mockClient.cache.writeData({
+    mockClient.cache.writeQuery({
+      query: localTestQuery,
       data: {
-        test: 'test',
+        fetchLocalUser: {
+          __typename: 'User',
+          name: 'Test',
+        },
       },
     })
 

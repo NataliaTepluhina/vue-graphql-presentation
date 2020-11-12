@@ -57,25 +57,9 @@ export function createProvider(options = {}) {
   const { apolloClient, wsClient } = createApolloClient({
     ...defaultOptions,
     ...options,
+    resolvers: {},
   })
   apolloClient.wsClient = wsClient
-
-  apolloClient.writeQuery({
-    query: allHeroesQuery,
-    data: {
-      allHeroes: [
-        {
-          __typename: 'Hero',
-          id: 'bneqe0dcq',
-          name: 'Eduardo San Martin Morote',
-          image:
-            'https://pbs.twimg.com/profile_images/1263046393486356486/TEuM0IAV_400x400.jpg',
-          twitter: 'posva',
-          github: 'posva',
-        },
-      ],
-    },
-  })
 
   // Create vue apollo provider
   const apolloProvider = new VueApollo({

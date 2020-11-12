@@ -1,3 +1,5 @@
-query localTest {
-  test @client
+query fetchLocalUser {
+  fetchLocalUser @client {
+    name
+  }
 }

@@ -81,7 +81,7 @@ export default {
       allHeroes: [],
       isSaving: false,
       queryError: null,
-      test: '',
+      fetchLocalUser: '',
     }
   },
   components: {
@@ -94,7 +94,7 @@ export default {
         this.queryError = true
       },
     },
-    test: {
+    fetchLocalUser: {
       query: localTestQuery,
       result() {
         console.log('Test fetched!')
