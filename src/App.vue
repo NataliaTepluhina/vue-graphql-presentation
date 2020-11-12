@@ -65,6 +65,7 @@ import VueHero from './components/VueHero'
 import allHeroesQuery from './graphql/allHeroes.query.gql'
 import addHeroMutation from './graphql/addHero.mutation.gql'
 import deleteHeroMutation from './graphql/deleteHero.mutation.gql'
+import localTestQuery from './graphql/localTest.query.gql'
 
 export default {
   name: 'app',
@@ -80,6 +81,7 @@ export default {
       allHeroes: [],
       isSaving: false,
       queryError: null,
+      test: '',
     }
   },
   components: {
@@ -90,6 +92,12 @@ export default {
       query: allHeroesQuery,
       error(e) {
         this.queryError = true
+      },
+    },
+    test: {
+      query: localTestQuery,
+      result() {
+        console.log('Test fetched!')
       },
     },
   },
@@ -141,7 +149,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .container.app-container.fluid.fill-height {
   align-items: start;
   max-width: 1240px;
@@ -167,23 +175,24 @@ export default {
 
 .hero-cards-layout {
   width: 100%;
-  .v-card__title.hero-title {
-    padding-bottom: 0;
-  }
+}
 
-  .hero-icons {
-    font-size: 24px;
-    padding-top: 10px;
-    a {
+.v-card__title.hero-title {
+  padding-bottom: 0;
+}
+
+.hero-icons {
+  font-size: 24px;
+  padding-top: 10px;
+  a {
+    color: inherit;
+    padding-right: 10px;
+    &:hover {
+      color: teal;
+    }
+    &:focus,
+    &:active {
       color: inherit;
-      padding-right: 10px;
-      &:hover {
-        color: teal;
-      }
-      &:focus,
-      &:active {
-        color: inherit;
-      }
     }
   }
 }

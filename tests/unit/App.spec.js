@@ -1,5 +1,4 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
 import Vuetify from 'vuetify'
 import AppComponent from '@/App.vue'
@@ -75,7 +74,9 @@ describe('App component', () => {
       ...handlers,
     }
 
-    mockClient = createMockClient()
+    mockClient = createMockClient({
+      resolvers: {},
+    })
 
     // Unfortunately, it's not possible to override handler already set
     // So we need to do all the work for setting handlers in the factory
@@ -114,6 +115,8 @@ describe('App component', () => {
 
   it('renders a loading block when query is in progress', () => {
     createComponent()
+
+    expect(requestHandlers.allHeroesQueryHandler).toHaveBeenCalled()
 
     expect(wrapper.find('.test-loading').exists()).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()

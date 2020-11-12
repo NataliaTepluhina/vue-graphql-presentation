@@ -1,14 +1,21 @@
-import Vue from 'vue';
-import App from './App.vue';
-import { createProvider } from './vue-apollo';
-import 'vuetify/dist/vuetify.min.css';
-import Vuetify from 'vuetify';
+import Vue from 'vue'
+import App from './App.vue'
+import { createProvider } from './vue-apollo'
+import 'vuetify/dist/vuetify.min.css'
+import Vuetify from 'vuetify'
 
-Vue.use(Vuetify);
+Vue.use(Vuetify)
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
+
+const apolloProvider = createProvider()
+apolloProvider.clients.defaultClient.cache.writeData({
+  data: {
+    test: 'test',
+  },
+})
 
 new Vue({
-  apolloProvider: createProvider(),
-  render: h => h(App),
-}).$mount('#app');
+  apolloProvider,
+  render: (h) => h(App),
+}).$mount('#app')
