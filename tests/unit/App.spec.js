@@ -78,6 +78,12 @@ describe('App component', () => {
       resolvers: {},
     })
 
+    mockClient.cache.writeData({
+      data: {
+        test: 'test',
+      },
+    })
+
     // Unfortunately, it's not possible to override handler already set
     // So we need to do all the work for setting handlers in the factory
     mockClient.setRequestHandler(
